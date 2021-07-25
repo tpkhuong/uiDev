@@ -107,3 +107,65 @@ ReactDOM.render(
 );
 
 /* props exercise 3 */
+
+/* list exercise  */
+
+/* exercise1 */
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+class List extends React.Component {
+  render() {
+    // Render a list using the "friends" being passed in.
+    return (
+      <ul>
+        {this.props.friends.map((friend) => (
+          <li key={friend.id}>{friend.name}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+ReactDOM.render(
+  <List
+    friends={[
+      { id: 893, name: "Mikenzi" },
+      { id: 871, name: "Cash" },
+      { id: 982, name: "Steven" },
+      { id: 61, name: "Kimmy" },
+      { id: 117, name: "Doug" },
+    ]}
+  />,
+  document.getElementById("root")
+);
+
+/* exercise1 */
+/* exercise2 */
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+class List extends React.Component {
+  render() {
+    // Render a list using the "friends" being passed in.
+
+    return (
+      <ul>
+        {this.props.friends.map((friend) => (
+          <li key={Math.random() * 10}>{friend}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+ReactDOM.render(
+  <List friends={["Mikenzi", "Cash", "Steven", "Kimmy", "Doug"]} />,
+  document.getElementById("root")
+);
+
+/* exercise2 */
+
+/* list exercise  */
