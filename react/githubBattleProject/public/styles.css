@@ -47,3 +47,9 @@ li {
   text-decoration: none;
   color: inherit;
 }
+
+button.nav-link:hover,
+button.nav-link:focus {
+  outline-color: rgb(233, 56, 56);
+  outline-offset: 2px;
+}
