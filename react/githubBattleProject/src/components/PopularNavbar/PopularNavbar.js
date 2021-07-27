@@ -1,5 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+
+/* using function component */
+
+function LanguagesNav({ selected, onUpdateLanguage }) {
+  var languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+
+  return (
+    <ul className="flex-center">
+      {languages.map((language, index) => (
+        <li key={language}>
+          <button
+            className="btn-clear nav-link"
+            style={language === selected ? { color: "rgb(187,46,31)" } : null}
+            onClick={() => onUpdateLanguage(language)}
+          >
+            {language}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+LanguagesNav.propTypes = {
+  selected: PropTypes.string.isRequired,
+  onUpdateLanguage: PropTypes.func.isRequired,
+};
 
 class Popular extends React.Component {
   constructor(props) {
@@ -20,26 +48,38 @@ class Popular extends React.Component {
 
   render() {
     //   variable goes here
-    var languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+    /* code from previous exercise */
+    // var languages = ["All", "JavaScript", "Ruby", "Java", "CSS", "Python"];
+    var { selectedLanguage } = this.state;
+
     return (
-      <ul className="flex-center">
-        {languages.map((language, index) => (
-          <li key={language}>
-            <button
-              className="btn-clear nav-link"
-              style={
-                language === this.state.selectedLanguage
-                  ? { color: "rgb(187,46,31)" }
-                  : null
-              }
-              onClick={() => this.updateLanguage(language)}
-            >
-              {language}
-            </button>
-          </li>
-        ))}
-      </ul>
+      <React.Fragment>
+        <LanguagesNav
+          selected={selectedLanguage}
+          onUpdateLanguage={this.updateLanguage}
+        ></LanguagesNav>
+      </React.Fragment>
     );
+    /* code from previous exercise */
+    // return (
+    //   <ul className="flex-center">
+    //     {languages.map((language, index) => (
+    //       <li key={language}>
+    //         <button
+    //           className="btn-clear nav-link"
+    //           style={
+    //             language === this.state.selectedLanguage
+    //               ? { color: "rgb(187,46,31)" }
+    //               : null
+    //           }
+    //           onClick={() => this.updateLanguage(language)}
+    //         >
+    //           {language}
+    //         </button>
+    //       </li>
+    //     ))}
+    //   </ul>
+    // );
   }
 }
 export default Popular;
