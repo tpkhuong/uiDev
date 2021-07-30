@@ -37,6 +37,7 @@ LanguagesNav.propTypes = {
 };
 
 function ReposGrid({ repos }) {
+  console.log(repos);
   return (
     <ul className="grid space-around">
       {repos.map((eachRepo, index) => {
