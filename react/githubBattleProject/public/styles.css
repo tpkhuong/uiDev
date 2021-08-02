@@ -63,6 +63,12 @@ button.nav-link:focus {
   justify-content: space-around;
 }
 
+.header-sm {
+  font-size: calc(28 / 16 * 1rem);
+  font-weight: 300;
+  margin: 10px;
+}
+
 .header-lg {
   font-size: calc(35 / 16 * 1rem);
   font-weight: 300;
@@ -124,4 +130,28 @@ button.nav-link:focus {
 
 .repo img {
   margin-bottom: 8px;
+}
+
+.instructions-container {
+  margin: 100px 0;
+}
+
+.container-sm {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.battle-instructions {
+  padding: 0;
+  font-size: calc(24 / 16 * 1rem);
+}
+
+.battle-instructions li {
+  flex: 1;
+  min-width: 300px;
+}
+
+.battle-instructions svg {
+  padding: 40px;
+  border-radius: 3px;
 }
