@@ -151,7 +151,6 @@ class Popular extends React.Component {
           selected={selectedLanguage}
           onUpdateLanguage={this.updateLanguage}
         ></LanguagesNav>
-
         {this.isLoading() && <p>LOADING</p>}
         {error && <p>{error}</p>}
         {repos[selectedLanguage] && (
