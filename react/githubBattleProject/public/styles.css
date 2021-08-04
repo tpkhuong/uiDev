@@ -224,3 +224,25 @@ button.nav-link:focus {
 .players-container {
   margin: 100px 0;
 }
+
+.avatar-small {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.player-info {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  font-size: calc(20 / 16 * 1rem);
+  padding: 10px;
+}
+
+.player-info .link {
+  margin-left: 10px;
+}
+
+.btn-space {
+  margin: 40px auto;
+}
