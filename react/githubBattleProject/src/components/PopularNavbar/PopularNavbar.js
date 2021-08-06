@@ -9,6 +9,7 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import Card from "../../components/Card/Card";
+import Loading from "../../components/Loading/Loading";
 /* using function component */
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
@@ -109,6 +110,7 @@ class Popular extends React.Component {
 
       fetchPopularRepos(selectedLanguage)
         .then((data) => {
+          // when we pass a function into setState, react will invoke the function passing it the current state(this.state)
           this.setState(({ repos }) => ({
             repos: {
               ...repos,
@@ -147,7 +149,7 @@ class Popular extends React.Component {
           selected={selectedLanguage}
           onUpdateLanguage={this.updateLanguage}
         ></LanguagesNav>
-        {this.isLoading() && <p>LOADING</p>}
+        {this.isLoading() && <Loading text="Fetching Repos" />}
         {error && <p className="center-text error">{error}</p>}
         {repos[selectedLanguage] && (
           <ReposGrid repos={repos[selectedLanguage]} />
