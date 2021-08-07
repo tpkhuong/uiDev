@@ -46,9 +46,13 @@ class PlayerInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // handleSubmit is invoked/called when the form is submitted when user click on the btn with type="submit"
   handleSubmit(event) {
     event.preventDefault();
-
+    // the .onSubmit is coming from us passing in a prop called onSubmit in our <PlayerInput/> component
+    //whatever is being entered in the input field(the username) will be passed into this.props.onSubmit
+    //which will be passed into the func that is declared in <Battle/> compoent. as the "player" parameter
+    //of the func this.handleSubmit in <Battle/> component
     this.props.onSubmit(this.state.username);
   }
 
@@ -60,11 +64,17 @@ class PlayerInput extends React.Component {
 
   render() {
     return (
+      // the onSubmit attr in <form> element with the func/method this.handleSubmit will be invoked when the <button> with attr type="submit" is clicked
+      //the onSubmit attr is coming in as prop being passed into <PlayerInput/> component
       <form className="column player" onSubmit={this.handleSubmit}>
         <label htmlFor="username" className="player-label">
           {this.props.label}
         </label>
         <div className="row player-inputs">
+          {/* Player Input video: controlled components. the value of the input will be whatever the value is assigned to this.state.username
+          in the this.setState of the component in the constructor of the component. we are updating the local state using handleChange will call
+          this.setState({username: event.target.value}) which will reRender. event.target.value will be whatever is typed into the input.
+          */}
           <input
             type="text"
             id="username"
@@ -154,7 +164,9 @@ class Battle extends React.Component {
   }
   render() {
     var { playerOne, playerTwo, battle } = this.state;
-
+    // reset btn algoritm is here when onReset is called it will invoke this.setState({playerOne: null, playerTwo: null, battle: false,})
+    //we will access it in <Results/> component. we will pass it to <button> onClick={}
+    //using this.props.reset
     if (battle === true) {
       return (
         <Results
@@ -184,6 +196,10 @@ class Battle extends React.Component {
             {playerOne === null ? (
               <PlayerInput
                 label="Player One"
+                // the onSubmit here is being passed as prop into our <PlayerInput/> component and it is being called/invoked in handleSubmit in <PlayerInput/> component
+                //it is also being used in the <Form> element as an attr and when onSubmit is called it will invoked this.handleSubmit of <PlayerInput/>
+                //when onSubmit is invoked it is being passed whatever is entered into the input field of <PlayerInput/> component
+                //whatever is being entered in the input field will be passed into the func in onSubmit as player
                 onSubmit={(player) => this.handleSubmit("playerOne", player)}
               />
             ) : (
@@ -211,6 +227,7 @@ class Battle extends React.Component {
           in the state of this Battle component it will render <Results> passing in props: playerOne={playerOne} playerTwo={playerTwo}
           */}
           {playerOne && playerTwo && (
+            // battle is a property in our Battle component state when battle is true it will render <Results/>
             <button
               className="btn dark-btn btn-space"
               onClick={() => this.setState({ battle: true })}

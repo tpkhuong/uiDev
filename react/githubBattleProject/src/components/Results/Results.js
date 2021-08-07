@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 import Loading from "../../components/Loading/Loading";
 
 function ProfileList({ profile }) {
+  console.log("profile", profile);
   return (
     <ul className="card-list">
       <li>
@@ -60,7 +61,8 @@ class Results extends React.Component {
   }
   componentDidMount() {
     var { playerOne, playerTwo } = this.props;
-
+    // battle func in api.js takes in an array as input/value/argument
+    //when setState and ReactDOM.render is called it will trigger a reRender
     battle([playerOne, playerTwo])
       .then((players) => {
         this.setState({
@@ -90,6 +92,7 @@ class Results extends React.Component {
     return (
       <React.Fragment>
         <div className="grid space-around container-sm">
+          {/* playerOne */}
           <Card
             header={winner.score === loser.score ? "Tie" : "Winner"}
             subheader={`Score: ${winner.score.toLocaleString()}`}
@@ -113,7 +116,7 @@ class Results extends React.Component {
             </a>
           </h3>
         </div> */}
-
+          {/* playerTwo */}
           <Card
             header={winner.score === loser.score ? "Tie" : "Loser"}
             subheader={`Score: ${loser.score.toLocaleString()}`}

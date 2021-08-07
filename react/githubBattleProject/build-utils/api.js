@@ -13,9 +13,11 @@ function getErrorMessage(message, username) {
 function getProfile(username) {
   return fetch(`https://api.github.com/users/${username}${params}`)
     .then((response) => {
+      console.log("getProfile", response);
       return response.json();
     })
     .then((profile) => {
+      console.log("getProfile", profile);
       if (profile.message) {
         throw new Error(getErrorMessage(profile.message, username));
       }
@@ -28,9 +30,11 @@ function getRepos(username) {
     `https://api.github.com/users/${username}/repos${params}&per_page=100`
   )
     .then((response) => {
+      console.log("getRepos", response);
       return response.json();
     })
     .then((repos) => {
+      console.log("getRepos", repos);
       if (repos.message) {
         throw new Error(repos.message, username);
       }
@@ -41,7 +45,9 @@ function getRepos(username) {
 
 function getStarCount(repos) {
   //repos is an array. it is an array of repos(obj maybe), each repos has a specific property called stargazers_count
+  console.log("repos in getStarCount", repos);
   return repos.reduce(function addStarCount(buildingUp, currentValue) {
+    console.log("currentValue", currentValue);
     var { stargazers_count } = currentValue;
     return buildingUp + stargazers_count;
   }, 0);

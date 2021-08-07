@@ -211,11 +211,14 @@ button.nav-link:focus {
   max-width: 200px;
 }
 
+/* when element with .dark-btn has disable, the btn will have white bg. when element with .dark-btn has disable false, the btn will have a black bg */
+/* disabled={!this.state.username}. when input is not blank this.state.username will be true but we use ! so it will be false which will not add attr disabled to element */
 .dark-btn {
   color: #e6e6e6;
   background: #141414;
 }
 
+/* disabled={!this.state.username}. when input is blank this.state.username will be false but we use ! so it will be true which will add attr disabled to element */
 .dark-btn:disabled {
   background: #f2f2f2;
   color: #c7c7c7;
