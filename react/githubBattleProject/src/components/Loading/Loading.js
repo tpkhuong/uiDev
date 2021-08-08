@@ -27,6 +27,9 @@ class Loading extends React.Component {
       this.state.content == text + "..."
         ? this.setState({ content: text })
         : //since we are passing a function into setState it means we are changing/updating piece of state of the previous state
+          //when we pass a function into this.setState(), it means we want to change the previous state to the new state
+          //the obj that is assigned to this.state will be pass in as the value/arugment to the func that we pass into this.setState()
+          //we can use obj destructuring
           this.setState(({ content }) => ({
             content: content + ".",
           }));
@@ -51,4 +54,23 @@ Loading.defaultProps = {
   speed: 300,
 };
 
+// default props for function component is like this
+// function Loading({ content, text }) {
+//   return (
+//     {
+
+//     }
+//   )
+// }
+
 export default Loading;
+
+function testingIdea({ name }) {
+  console.log(`Hello ${name}`);
+}
+
+var objOfStuff = {
+  name: "Deadpool",
+};
+
+testingIdea(objOfStuff);

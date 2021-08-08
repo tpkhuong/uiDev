@@ -73,7 +73,7 @@ function sortPlayers(players) {
     return b.score - a.score;
   });
 }
-
+// players parameter in battle func is an array
 export function battle(players) {
   return Promise.all([getUserData(players[0]), getUserData(players[1])]).then(
     (results) => {

@@ -54,9 +54,12 @@ class PlayerInput extends React.Component {
     //which will be passed into the func that is declared in <Battle/> compoent. as the "player" parameter
     //of the func this.handleSubmit in <Battle/> component
     this.props.onSubmit(this.state.username);
+    console.log(this.props.onSubmit);
   }
 
   handleChange(event) {
+    // whatever the user enter in <input> will be assigned to this.state.username in our state
+    //whenever setState or ReactDOM.render is called it will trigger a reRender
     this.setState({
       username: event.target.value,
     });
@@ -65,7 +68,9 @@ class PlayerInput extends React.Component {
   render() {
     return (
       // the onSubmit attr in <form> element with the func/method this.handleSubmit will be invoked when the <button> with attr type="submit" is clicked
-      //the onSubmit attr is coming in as prop being passed into <PlayerInput/> component
+      /* we will render <PlayerIput> inside of <Battle> component pass a onSubmit prop. whenever <form> is submitted the prop(we will pass a function as prop) 
+      onSubmit prop/func inside the <PlayerInput> component declaration which is inside the handleSubmit method will be invoked passing username
+      */
       <form className="column player" onSubmit={this.handleSubmit}>
         <label htmlFor="username" className="player-label">
           {this.props.label}
@@ -198,8 +203,13 @@ class Battle extends React.Component {
                 label="Player One"
                 // the onSubmit here is being passed as prop into our <PlayerInput/> component and it is being called/invoked in handleSubmit in <PlayerInput/> component
                 //it is also being used in the <Form> element as an attr and when onSubmit is called it will invoked this.handleSubmit of <PlayerInput/>
+                //the onSubmit attr of <Form> will be called/invoked when user click the <Button> with type="submit"
                 //when onSubmit is invoked it is being passed whatever is entered into the input field of <PlayerInput/> component
                 //whatever is being entered in the input field will be passed into the func in onSubmit as player
+                /* the onSubmit prop we pass into <PlayerInput/> render will be called when handleSubmit method declared in <PlayerInput/> is invoked 
+                it will be invoked when the form is submitted because of the onSubmit attr we are passing in this.handleSubmit. <form onSubmit={this.handleSubmit}
+                */
+
                 onSubmit={(player) => this.handleSubmit("playerOne", player)}
               />
             ) : (
@@ -210,6 +220,9 @@ class Battle extends React.Component {
               />
             )}
             {playerTwo === null ? (
+              //this.handleSubmit will call setState. we are passing in two arguments, id and player. id is either "playerOne" or "playerTwo"
+              //in the <Battle/> component state "playerOne" will be the data of one player and "playerTwo" will be the data of another player
+              //"playerOne" or "playerTwo" will be properties on the this.state obj
               <PlayerInput
                 label="Player Two"
                 onSubmit={(player) => this.handleSubmit("playerTwo", player)}
