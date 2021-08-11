@@ -11,6 +11,111 @@ import {
 import Card from "../../components/Card/Card";
 import PropTypes from "prop-types";
 import Loading from "../../components/Loading/Loading";
+import Tooltip from "../../components/Tooltip/Tooltip";
+
+const styles = {
+  container: {
+    position: "relative",
+    display: "flex",
+  },
+  tooltip: {
+    boxSizing: "border-box",
+    position: "absolute",
+    width: "160px",
+    bottom: "100%",
+    left: "50%",
+    marginLeft: "-80px",
+    borderRadius: "3px",
+    backgroundColor: "hsla(0, 0%, 20%, 0.9)",
+    padding: "7px",
+    marginBottom: "5px",
+    color: "#fff",
+    textAlign: "center",
+    fontSize: "14px",
+  },
+};
+
+// converting function component to class component we want to work with state
+// converting class component back to function component
+/* we moved our tooltip code into its own component Tooltip */
+
+// class ProfileList extends React.Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       hoveringLocation: false,
+//       hoveringCompany: false,
+//     };
+
+//     this.mouseOver = this.mouseOver.bind(this);
+//     this.mouseOut = this.mouseOut.bind(this);
+//   }
+
+//   mouseOver(id) {
+//     this.setState({
+//       [id]: true,
+//     });
+//   }
+
+//   mouseOut(id) {
+//     this.setState({
+//       [id]: false,
+//     });
+//   }
+
+//   render() {
+//     var { profile } = this.props;
+//     var { hoveringLocation, hoveringCompany } = this.state;
+
+//     return (
+//       <ul className="card-list">
+//         <li>
+//           <FaUser color="rgb(239,115,115)" size={22} />
+//           {profile.name}
+//         </li>
+
+//         {profile.location && (
+//           <li
+//             onMouseOver={() => this.mouseOver("hoveringLocation")}
+//             onMouseOut={() => this.mouseOut("hoveringLocation")}
+//             style={styles.container}
+//           >
+//             {hoveringLocation === true && (
+//               <div style={styles.tooltip}>User's location</div>
+//             )}
+//             <FaCompass color="rgb(144,115,255)" size={22} />
+//             {profile.location}
+//           </li>
+//         )}
+//         {profile.company && (
+//           <li
+//             onMouseOver={() => this.mouseOver("hoveringCompany")}
+//             onMouseOut={() => this.mouseOut("hoveringCompany")}
+//             style={styles.container}
+//           >
+//             {hoveringCompany === true && (
+//               <div style={styles.tooltip}>User's company</div>
+//             )}
+//             <FaBriefcase color="#795548" size={22} />
+//             {profile.company}
+//           </li>
+//         )}
+//         <li>
+//           <FaUsers color="rgb(129,195,245)" size={22} />
+//           {profile.followers.toLocaleString()} followers
+//         </li>
+//         <li>
+//           <FaUserFriends color="rgb(64,183,95)" size={22} />
+//           {profile.following.toLocaleString()} follow
+//         </li>
+//       </ul>
+//     );
+//   }
+// }
+
+// converting function component to class component we want to work with state
+// converting class component back to function component
 
 function ProfileList({ profile }) {
   console.log("profile", profile);
@@ -23,14 +128,18 @@ function ProfileList({ profile }) {
 
       {profile.location && (
         <li>
-          <FaCompass color="rgb(144,115,255)" size={22} />
-          {profile.location}
+          <Tooltip text="User's location">
+            <FaCompass color="rgb(144,115,255)" size={22} />
+            {profile.location}
+          </Tooltip>
         </li>
       )}
       {profile.company && (
         <li>
-          <FaBriefcase color="#795548" size={22} />
-          {profile.company}
+          <Tooltip text="User's company">
+            <FaBriefcase color="#795548" size={22} />
+            {profile.company}
+          </Tooltip>
         </li>
       )}
       <li>

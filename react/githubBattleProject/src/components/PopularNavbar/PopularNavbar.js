@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 import Card from "../../components/Card/Card";
 import Loading from "../../components/Loading/Loading";
+import Tooltip from "../../components/Tooltip/Tooltip";
+
 /* using function component */
 
 function LanguagesNav({ selected, onUpdateLanguage }) {
@@ -56,8 +58,18 @@ function ReposGrid({ repos }) {
             >
               <ul className="card-list">
                 <li>
-                  <FaUser color="rgb(255,191,116)" size={22} />
-                  <a href={`https://github.com/${login}`}>{login}</a>
+                  {/* in order to see what Tooltip render or is, first look at what we are importing when we use <Tooltip/>  */}
+                  {/* we are importing whatever is coming from Tooltip.js which is the invocation of withHover() passing it the Tooltip component as a value/argument */}
+                  {/* then we look at what withHover() is returning */}
+                  {/* whatever withHover returns is imported in this file. */}
+                  {/* that is what being render right below this */}
+                  {/* withHover is returning another Component */}
+                  <Tooltip text="Github username">
+                    {/* we are not directly rendering our Tooltip we rendering the WithHover component */}
+                    {/* any props we pass to <Tooltip/> is being passed as props to WithHover.js */}
+                    <FaUser color="rgb(255,191,116)" size={22} />
+                    <a href={`https://github.com/${login}`}>{login}</a>
+                  </Tooltip>
                 </li>
                 <li>
                   <FaStar color="rgb(255,215,0)" size={22} />
@@ -107,7 +119,7 @@ class Popular extends React.Component {
     // only want to fetch repos if !this.state.repos[selectedLanguage] is falsy
     if (!this.state.repos[selectedLanguage]) {
       //use arrow functions so we have lexical this
-
+      console.log("state", this.state);
       fetchPopularRepos(selectedLanguage)
         .then((data) => {
           // when we pass a function into setState, react will invoke the function passing it the current state(this.state)
