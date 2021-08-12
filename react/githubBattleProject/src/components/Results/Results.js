@@ -129,6 +129,7 @@ function ProfileList({ profile }) {
       {profile.location && (
         <li>
           <Tooltip text="User's location">
+            {/* things that are wrapper between <Tooltip> </Tooltip> are the component's children */}
             <FaCompass color="rgb(144,115,255)" size={22} />
             {profile.location}
           </Tooltip>
