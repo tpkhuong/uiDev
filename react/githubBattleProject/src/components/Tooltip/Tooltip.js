@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withHover from "../withHover/withHover";
+// import withHover from "../withHover/withHover";
+
+// using Rendering Props
+import Hover from "../Hover/Hover";
 
 const styles = {
   container: {
@@ -66,13 +69,24 @@ const styles = {
 
 // decouple our Tooltip component
 
+//we won't pass in text,children, hovering
+//we will pass text, children
 function Tooltip({ text, children, hovering }) {
   return (
     // don't need onMouseOver or onMouseOut because we are passing in hovering.
-    <div style={styles.container}>
-      {hovering === true && <div style={styles.tooltip}>{text}</div>}
-      {children}
-    </div>
+    <Hover>
+      {/* we will have what we want to render as a children prop to <Hover> component */}
+      {(hovering) => (
+        <div style={styles.container}>
+          {hovering === true && <div style={styles.tooltip}>{text}</div>}
+          {children}
+        </div>
+      )}
+      {/* <div style={styles.container}>
+        {hovering === true && <div style={styles.tooltip}>{text}</div>}
+        {children}
+      </div> */}
+    </Hover>
   );
 }
 
@@ -86,6 +100,14 @@ Tooltip.propTypes = {
 // one way to avoid naming collisions. pass in another agrument to invocation of withHover
 //change the class WithHover definition
 //withHover(Tooltip, "hovering"); dont need to pass in "hovering" because in our withHover definition we are using default paremeter. that parameter is "hovering"
-export default withHover(Tooltip, "hovering");
+/* using Render Props  */
+// export default withHover(Tooltip, "hovering");
 
-// export default Tooltip;
+export default Tooltip;
+
+var foodItems = "cheesemeatdrinkchips";
+
+var index = foodItems.indexOf("meet");
+console.log(index); //-1
+var index = foodItems.indexOf("meat");
+console.log(index); //6
