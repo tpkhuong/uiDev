@@ -13,6 +13,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+    // publicPath works with devServer: historyApiFallback
+    publicPath: "/",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -20,4 +22,8 @@ module.exports = {
     }),
   ],
   mode: "development",
+  devServer: {
+    // look at output: {publicPath: "/"}
+    historyApiFallback: true,
+  },
 };
