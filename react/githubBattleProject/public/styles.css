@@ -54,6 +54,10 @@ li {
   color: inherit;
 }
 
+.nav li:first-child {
+  margin-inline-end: 10px;
+}
+
 button.nav-link:hover,
 button.nav-link:focus {
   outline-color: rgb(233, 56, 56);
@@ -67,6 +71,10 @@ button.nav-link:focus {
 
 .space-around {
   justify-content: space-around;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .header-sm {
