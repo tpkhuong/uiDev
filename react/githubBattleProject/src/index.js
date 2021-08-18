@@ -5,6 +5,7 @@ import Popular from "./components/PopularNavbar/PopularNavbar";
 import Battle from "./components/Battle/Battle";
 import { ThemeProvider } from "../context/theme";
 import Nav from "../src/components/Nav/Nav";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -25,15 +26,21 @@ class App extends React.Component {
     return (
       // <ThemeProvider> will take in a prop called value. whatever we passed to value prop
       //will be available to any component inside of our application that use the <ThemeConsumer>(the consumer)
-      <ThemeProvider value={this.state}>
-        <div className={this.state.theme}>
-          <div className="container">
-            <Nav />
-            {/* <Popular /> */}
-            <Battle />
+      <Router>
+        <ThemeProvider value={this.state}>
+          <div className={this.state.theme}>
+            <div className="container">
+              <Nav />
+              {/* using Router to render Popular and Battle component */}
+              {/* <Popular /> */}
+              {/* <Battle /> */}
+              <Route exact path="/" component={Popular} />
+              <Route path="/battle" component={Battle} />
+              {/* modify webpack.config.js file. the devServer part */}
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
+        </ThemeProvider>
+      </Router>
     );
   }
 }
