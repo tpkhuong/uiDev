@@ -12,6 +12,8 @@ import Card from "../../components/Card/Card";
 import PropTypes from "prop-types";
 import Loading from "../../components/Loading/Loading";
 import Tooltip from "../../components/Tooltip/Tooltip";
+import queryString from "query-string";
+import { Link } from "react-router-dom";
 
 const styles = {
   container: {
@@ -170,7 +172,11 @@ class Results extends React.Component {
     };
   }
   componentDidMount() {
-    var { playerOne, playerTwo } = this.props;
+    // we are getting playerOne and playerTwo from query string now instead of from props(this.props)
+    // var { playerOne, playerTwo } = this.props;
+    var { playerOne, playerTwo } = queryString.parse(
+      this.props.location.search
+    );
     // battle func in api.js takes in an array as input/value/argument
     //when setState and ReactDOM.render is called it will trigger a reRender
     battle([playerOne, playerTwo])
@@ -280,18 +286,22 @@ class Results extends React.Component {
           </h3>
         </div> */}
         </div>
-        <button className="btn dark-btn btn-space" onClick={this.props.onReset}>
+        {/* button is converted to a Link */}
+        <Link className="btn dark-btn btn-space" to="/battle">
           Reset
-        </button>
+        </Link>
       </React.Fragment>
     );
   }
 }
 
-Results.propTypes = {
-  playerOne: PropTypes.string.isRequired,
-  playerTwo: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
-};
+/* Results is now being rendered by React router, we dont need propTypes on the Result component */
+// Results.propTypes = {
+//   playerOne: PropTypes.string.isRequired,
+//   playerTwo: PropTypes.string.isRequired,
+// we dont need onReset it is not coming in by props
+//Results is being rendered by React router
+// onReset: PropTypes.func.isRequired,
+// };
 
 export default Results;
