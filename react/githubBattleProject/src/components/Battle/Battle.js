@@ -8,6 +8,7 @@ import {
 import PropTypes from "prop-types";
 import Results from "../Results/Results";
 import { ThemeConsumer } from "../../../context/theme";
+import { Link } from "react-router-dom";
 
 function Instructions() {
   return (
@@ -171,7 +172,9 @@ class Battle extends React.Component {
     this.state = {
       playerOne: null,
       playerTwo: null,
-      battle: false,
+      /* want to render battle component using query strings */
+
+      // battle: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -190,25 +193,29 @@ class Battle extends React.Component {
     });
   }
   render() {
-    var { playerOne, playerTwo, battle } = this.state;
+    /* want to render battle component using query strings */
+
+    var { playerOne, playerTwo } = this.state;
     // reset btn algoritm is here when onReset is called it will invoke this.setState({playerOne: null, playerTwo: null, battle: false,})
     //we will access it in <Results/> component. we will pass it to <button> onClick={}
     //using this.props.reset
-    if (battle === true) {
-      return (
-        <Results
-          playerOne={playerOne}
-          playerTwo={playerTwo}
-          onReset={() => {
-            this.setState({
-              playerOne: null,
-              playerTwo: null,
-              battle: false,
-            });
-          }}
-        />
-      );
-    }
+
+    /* want to render battle component using query strings */
+    // if (battle === true) {
+    //   return (
+    //     <Results
+    //       playerOne={playerOne}
+    //       playerTwo={playerTwo}
+    //       onReset={() => {
+    //         this.setState({
+    //           playerOne: null,
+    //           playerTwo: null,
+    //           battle: false,
+    //         });
+    //       }}
+    //     />
+    //   );
+    // }
 
     return (
       <React.Fragment>
@@ -263,12 +270,26 @@ class Battle extends React.Component {
           */}
           {playerOne && playerTwo && (
             // battle is a property in our Battle component state when battle is true it will render <Results/>
-            <button
+            /* want to render battle component using query strings */
+            /* we will render a link */
+
+            // <button
+            //   className="btn dark-btn btn-space"
+            //   onClick={() => this.setState({ battle: true })}
+
+            // >
+            //   Battle
+            // </button>
+            /* then we need to tell React what component we want to render*/
+            <Link
               className="btn dark-btn btn-space"
-              onClick={() => this.setState({ battle: true })}
+              to={{
+                pathname: "/battle/results",
+                search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`,
+              }}
             >
               Battle
-            </button>
+            </Link>
           )}
         </div>
       </React.Fragment>
