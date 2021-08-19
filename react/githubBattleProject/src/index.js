@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import "../public/styles.css";
 import Popular from "./components/PopularNavbar/PopularNavbar";
 import Battle from "./components/Battle/Battle";
+import Results from "./components/Results/Results";
 import { ThemeProvider } from "../context/theme";
 import Nav from "../src/components/Nav/Nav";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +36,8 @@ class App extends React.Component {
               {/* <Popular /> */}
               {/* <Battle /> */}
               <Route exact path="/" component={Popular} />
-              <Route path="/battle" component={Battle} />
+              <Route exact path="/battle" component={Battle} />
+              <Route path="/battle/results" component={Results} />
               {/* modify webpack.config.js file. the devServer part */}
             </div>
           </div>
