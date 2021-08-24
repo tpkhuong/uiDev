@@ -1,0 +1,22 @@
+{
+  "name": "hackernewsclonefunproject",
+  "version": "1.0.0",
+  "description": "building react app. Let's GOOOOO!",
+  "main": "index.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve"
+  },
+  "author": "KhuongCorp",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
