@@ -16,5 +16,5 @@ ReactDOM.render(
   // React element
   <App />,
   // where to render the element to
-  document.getElementById("app")
+  document.getElementById("app-wrapper")
 );
