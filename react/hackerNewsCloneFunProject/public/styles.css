@@ -315,7 +315,23 @@ a:hover {
   background-color: transparent;
 }
 
+.open-btn[aria-pressed="true"] {
+  display: none;
+}
+
+/* when .open-btn has aria-pressed false it means user did not click on it.
+when user click on .open-btn we will make aria-pressed to true which will hide .open-btn
+and show .close-btn
+*/
+
 .open-btn[aria-pressed="false"] + .close-btn {
+  display: none;
+}
+
+/* we hide our .close-btn when user click on it. aria-pressed will be true which will also hide our modal (dialog1) element */
+/* when .close-btn has aria-pressed = false our dialog1 (modal) will show. when user click on .close-btn we will set aria-pressed to true */
+
+.close-btn[aria-pressed="true"] + [class="dialog1"] {
   display: none;
 }
 
@@ -328,7 +344,11 @@ a:hover {
   padding-block-start: 50px;
   padding-inline: 24px;
   background-color: var(--col-navbar-bg);
-  background-image: url("./images/fromInsureDir/images/bg-pattern-mobile-nav.svg");
+}
+
+.img-wrapper {
+  margin-inline: -24px;
+  margin-block-start: 86px;
 }
 
 [id="mobile-navbar"] {
