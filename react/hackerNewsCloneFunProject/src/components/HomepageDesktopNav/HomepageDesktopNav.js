@@ -1,5 +1,7 @@
 import React from "react";
 
+// our selectors at top of module
+
 class HomepageDesktopnav extends React.Component {
   render() {
     return (

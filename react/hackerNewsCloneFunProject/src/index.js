@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 // State
 // lifecycle
 // UI
+
 class App extends React.Component {
   render() {
     return <Navbar></Navbar>;

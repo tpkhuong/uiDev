@@ -4,8 +4,40 @@ import Close from "../../../public/images/fromInsureDir/images/icon-close.svg";
 import NavModal from "../NavModal/NavModal";
 import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import HomepageDesktopNav from "../HomepageDesktopNav/HomepageDesktopNav";
-
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    console.log(this.state.openBtn);
+    console.log(event.target.parentElement);
+    if (event.target.parentElement == this.state.openBtn) {
+      console.log("here");
+    }
+  }
+
+  componentDidMount() {
+    const { openBtn, closeBtn } = ourSelectors();
+    // const openBtn = document.querySelector(".open-btn");
+    // const closeBtn = document.querySelector(".close-btn");
+    this.state.openBtn = openBtn;
+    // our this.state.testArr will be an array with our openBtn in it [button.open-btn]
+    console.log("this is in componentDidMount", this.state.openBtn);
+    function ourSelectors() {
+      //open btn
+      var openBtn = document.querySelector(".open-btn");
+      //close btn
+      var closeBtn = document.querySelector(".close-btn");
+      return {
+        openBtn,
+        closeBtn,
+      };
+    }
+  }
+
   render() {
     return (
       <article className="navbar-container">
@@ -22,16 +54,18 @@ class Navbar extends React.Component {
           aria-label="open navbar menu"
           className="open-btn"
           aria-pressed="false"
+          onTouchStart={this.handleClick}
         >
           <img src={Hamburger} alt="the horizontal lines" />
         </button>
         <button
           aria-label="close navbar menu"
           className="close-btn"
-          aria-pressed="false"
+          aria-pressed="true"
         >
           <img src={Close} alt="" />
         </button>
+        {/* items={this.state.testArr[0]} we changed our this.state to this.state.openBtn instead of this.state.testArr */}
         <NavModal>{/* <HomepageNav /> */}</NavModal>
       </article>
     );

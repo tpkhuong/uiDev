@@ -1,9 +1,17 @@
 import React from "react";
 import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import "../../../public/styles.css";
-import BgImage from "../../../public/images/fromInsureDir/images/bg-pattern-mobile-nav.svg";
+import MobileNavBgImg from "../../../public/bg-pattern-mobile-nav.svg";
 
 class NavModal extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    let openBtn = document.querySelector(".open-btn");
+    console.log("this is NavModal", openBtn);
+  }
   render() {
     return (
       <div
@@ -43,6 +51,9 @@ class NavModal extends React.Component {
           </ul> */}
           {/* make a class for dynamic navbar button */}
         </nav>
+        <div className="img-wrapper">
+          <img src={MobileNavBgImg} alt="" />
+        </div>
       </div>
     );
   }
