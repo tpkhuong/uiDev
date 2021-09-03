@@ -8,14 +8,16 @@ module.exports = {
       { test: /\.(js|jsx)$/, exclude: /node_modules/, use: "babel-loader" },
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
       {
-        test: /\.svg$/,
-        use: {
-          loader: "svg-url-loader",
-          options: {
-            ieSafe: true,
-          },
-        },
+        test: /\.(png|jpg|gif)$/i,
+        type: "asset/resource",
+        // use: {
+        //   loader: "svg-url-loader",
+        //   options: {
+        //     ieSafe: true,
+        //   },
+        // },
       },
+      { test: /\.svg$/, type: "asset/inline" },
     ],
   },
   output: {
