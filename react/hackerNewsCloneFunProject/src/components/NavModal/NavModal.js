@@ -2,6 +2,7 @@ import React from "react";
 import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import "../../../public/styles.css";
 import MobileNavBgImg from "../../../public/bg-pattern-mobile-nav.svg";
+import NavBgImg from "../../images/bg-pattern-mobile-nav.svg";
 
 class NavModal extends React.Component {
   constructor(props) {
@@ -17,8 +18,11 @@ class NavModal extends React.Component {
       <div
         role="dialog"
         aria-modal="true"
-        className="dialog1"
+        className="dialog1 mobile-navbar-bg"
         aria-labelledby="dialog1"
+        style={{
+          backgroundImage: `url(${NavBgImg})`,
+        }}
       >
         <nav role="navigation" aria-labelledby="dialog1" id="mobile-navbar">
           <h2 className="visually-hidden" id="dialog1">
@@ -51,9 +55,10 @@ class NavModal extends React.Component {
           </ul> */}
           {/* make a class for dynamic navbar button */}
         </nav>
-        <div className="img-wrapper">
+        {/* dont need to use div with class of img-wrapper with an <img> as its child because we will add our svg as a bg-img inline on div with dialog1 class using inline styling */}
+        {/* <div className="img-wrapper">
           <img src={MobileNavBgImg} alt="" />
-        </div>
+        </div> */}
       </div>
     );
   }

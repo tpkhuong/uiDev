@@ -4,43 +4,128 @@ import Close from "../../../public/images/fromInsureDir/images/icon-close.svg";
 import NavModal from "../NavModal/NavModal";
 import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import HomepageDesktopNav from "../HomepageDesktopNav/HomepageDesktopNav";
+import { ourSelectors } from "../../selectors";
+
+alert("work on focus modal feature");
+
 class Navbar extends React.Component {
+  /***** ourSelectors() will work in handleClick which will bind to this component using this.handleClick.bind(this) *****/
+  /***** ourSelectors() will work in componentDidMount(){} *****/
+  /************/
+  /************/
+  /***** ourSelectors() will not work in constructor or render() method of this component unless  *****/
+  /***** we assign a property in this.state obj of this compoent. the value we assign to that property will be  *****/
+  /***** a reference to ourSelectors()  *****/
   constructor(props) {
     super(props);
-    this.state = {};
-    this.handleClick = this.handleClick.bind(this);
+    this.handleOpenNavMenu = this.handleOpenNavMenu.bind(this);
+    this.handleCloseNavMenu = this.handleCloseNavMenu.bind(this);
+    this.handleTouchEvent = this.handleTouchEvent.bind(this);
+    this.handleKeyDownEvent = this.handleKeyDownEvent.bind(this);
+    /***** *****/
+    this.state = { selector: ourSelectors };
+    console.log(this.state.selector);
+    this.testing = ourSelectors.bind(this);
+    console.log("constructor", ourSelectors()); //openBtn and closeBtn are null
   }
 
-  handleClick(event) {
-    console.log(this.state.openBtn);
-    console.log(event.target.parentElement);
-    if (event.target.parentElement == this.state.openBtn) {
-      console.log("here");
+  handleTouchEvent(event) {
+    const { openBtn, closeBtn } = ourSelectors();
+
+    if (event.target.parentElement == openBtn) {
+      openBtn.setAttribute("aria-pressed", "true");
+      closeBtn.setAttribute("aria-pressed", "false");
     }
+
+    if (event.target.parentElement == closeBtn) {
+      closeBtn.attributes["aria-pressed"].value = "true";
+      openBtn.attributes["aria-pressed"].value = "false";
+    }
+  }
+
+  handleOpenNavMenu(event) {
+    // let ourElements = ourSelectors();
+    // let { openBtn, closeBtn } = ourElements;
+    // console.log(
+    //   "from NavBar inside handleClick. openBtn from selectors.js",
+    //   ourElements.openbtn
+    // );
+    // let { openBtn } = this.state.selector();
+    // var { openBtn, closeBtn } = anotherObj;
+    const { openBtn, closeBtn } = ourSelectors();
+    console.log("openbtn", openBtn);
+    // console.log("openBtn", openBtn);
+    // console.log("closeBtn", closeBtn);
+    // console.log(this.state.openBtn);
+    // console.log(event.target.parentElement);
+    // if (event.target.parentElement == this.state.openBtn) {
+    //   console.log("here");
+    // }
+    console.log(event.target.parentElement);
+    if (event.target.parentElement == openBtn) {
+      // when user click on hamburger btn we want to see hamburger btn aria-pressed to true
+      //set close btn aria-pressed to false
+      /***** works *****/
+      // openBtn.attributes["aria-pressed"].value = "true";
+      // closeBtn.attributes["aria-pressed"].value = "false";
+      openBtn.setAttribute("aria-pressed", "true");
+      closeBtn.setAttribute("aria-pressed", "false");
+    }
+  }
+
+  handleCloseNavMenu(event) {
+    const { openBtn, closeBtn } = ourSelectors();
+    if (event.target.parentElement == closeBtn) {
+      //when user click on closeBtn we will set closeBtn aria-pressed to true
+      //set openBtn aria-pressed to false
+      closeBtn.attributes["aria-pressed"].value = "true";
+      openBtn.attributes["aria-pressed"].value = "false";
+    }
+  }
+
+  handleKeyDownEvent(event) {
+    console.log("handleKeyDownEvent", event.target);
   }
 
   componentDidMount() {
-    const { openBtn, closeBtn } = ourSelectors();
+    console.log("componentDidMount", ourSelectors());
+    var { openBtn, closeBtn } = ourSelectors();
+    console.log("openBtn", openBtn);
+    console.log("closeBtn", closeBtn);
+    /***** we can either declare ourSelectors func in componentDidMount for each component *****/
+    /***** or a better approach will be to have a js file in our build-utils or in our src dir *****/
+    /***** the function we export from the js file in build-utils will return an obj with our element selectors *****/
+    /***** depend on the component we will import the functions that has our element selectors when we need to interact with an element *****/
+    // const ourEles = ourSelectors();
+    // console.log(ourEles.openbtn);
     // const openBtn = document.querySelector(".open-btn");
     // const closeBtn = document.querySelector(".close-btn");
-    this.state.openBtn = openBtn;
     // our this.state.testArr will be an array with our openBtn in it [button.open-btn]
-    console.log("this is in componentDidMount", this.state.openBtn);
-    function ourSelectors() {
-      //open btn
-      var openBtn = document.querySelector(".open-btn");
-      //close btn
-      var closeBtn = document.querySelector(".close-btn");
-      return {
-        openBtn,
-        closeBtn,
-      };
-    }
+    // console.log("this is in componentDidMount", this.state);
+    // function ourSelectors() {
+    //   //open btn
+    //   var openBtn = document.querySelector(".open-btn");
+    //   //close btn
+    //   var closeBtn = document.querySelector(".close-btn");
+    //   return {
+    //     openBtn,
+    //     closeBtn,
+    //   };
+    // }
   }
 
   render() {
+    // we are able to call the func ourSelectors in the render method because we assign the func reference to ourSelector as a value to the obj property
+    //selector in the obj (this.state) of this component
+    console.log("render method", this.state.selector); //this will be our function from selectors.js that we export as ourSelectors
+    console.log("render method not referencing this.state", ourSelectors()); //openBtn and closeBtn are null
+    console.log(this.testing);
     return (
-      <article className="navbar-container">
+      <article
+        className="navbar-container"
+        onTouchStart={this.handleTouchEvent}
+        onKeyDown={this.handleKeyDownEvent}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="18">
           <desc>Insure Company logo</desc>
           <path
@@ -54,7 +139,8 @@ class Navbar extends React.Component {
           aria-label="open navbar menu"
           className="open-btn"
           aria-pressed="false"
-          onTouchStart={this.handleClick}
+          /***** ****/
+          // onTouchStart={this.handleOpenNavMenu}
         >
           <img src={Hamburger} alt="the horizontal lines" />
         </button>
@@ -62,6 +148,8 @@ class Navbar extends React.Component {
           aria-label="close navbar menu"
           className="close-btn"
           aria-pressed="true"
+          /***** ****/
+          // onTouchStart={this.handleCloseNavMenu}
         >
           <img src={Close} alt="" />
         </button>

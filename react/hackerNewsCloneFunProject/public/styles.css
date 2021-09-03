@@ -331,7 +331,7 @@ and show .close-btn
 /* we hide our .close-btn when user click on it. aria-pressed will be true which will also hide our modal (dialog1) element */
 /* when .close-btn has aria-pressed = false our dialog1 (modal) will show. when user click on .close-btn we will set aria-pressed to true */
 
-.close-btn[aria-pressed="true"] + [class="dialog1"] {
+.close-btn[aria-pressed="true"] + .dialog1 {
   display: none;
 }
 
@@ -346,6 +346,12 @@ and show .close-btn
   background-color: var(--col-navbar-bg);
 }
 
+.mobile-navbar-bg {
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* dont need style below since we will add svg using inline style as a bg-img */
 .img-wrapper {
   margin-inline: -24px;
   margin-block-start: 86px;
