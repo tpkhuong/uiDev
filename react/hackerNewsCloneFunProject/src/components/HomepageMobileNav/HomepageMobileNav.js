@@ -20,7 +20,7 @@ class HomepageMobileNav extends React.Component {
           </a>
         </li>
         <li role="menuitem" className="navlist">
-          <button role="button" className="navbar-btn">
+          <button role="button" className="navbar-btn" id="homepage-navbtn">
             View Plans
           </button>
         </li>

@@ -22,6 +22,7 @@ class Navbar extends React.Component {
     this.handleCloseNavMenu = this.handleCloseNavMenu.bind(this);
     this.handleTouchEvent = this.handleTouchEvent.bind(this);
     this.handleKeyDownEvent = this.handleKeyDownEvent.bind(this);
+    this.testingStuff = this.testingStuff.bind(this);
     /***** *****/
     this.state = { selector: ourSelectors };
     console.log(this.state.selector);
@@ -30,8 +31,8 @@ class Navbar extends React.Component {
   }
 
   handleTouchEvent(event) {
-    const { openBtn, closeBtn } = ourSelectors();
-
+    const { openBtn, closeBtn, lastItemOfModal } = ourSelectors();
+    console.log("lastItemOfModal", lastItemOfModal);
     if (event.target.parentElement == openBtn) {
       openBtn.setAttribute("aria-pressed", "true");
       closeBtn.setAttribute("aria-pressed", "false");
@@ -92,6 +93,7 @@ class Navbar extends React.Component {
     var { openBtn, closeBtn } = ourSelectors();
     console.log("openBtn", openBtn);
     console.log("closeBtn", closeBtn);
+    openBtn.addEventListener("click", this.testingStuff); //this work our openBtn will have click event added to it
     /***** we can either declare ourSelectors func in componentDidMount for each component *****/
     /***** or a better approach will be to have a js file in our build-utils or in our src dir *****/
     /***** the function we export from the js file in build-utils will return an obj with our element selectors *****/
@@ -114,6 +116,16 @@ class Navbar extends React.Component {
     // }
   }
 
+  testingStuff(event) {
+    console.log(event);
+    // function thankYouJosh() {
+    //   var joshIsGreatPerson = true;
+    //   while (joshIsGreatPerson) {
+    //     console.log("Thank you Josh");
+    //   }
+    // }
+  }
+
   render() {
     // we are able to call the func ourSelectors in the render method because we assign the func reference to ourSelector as a value to the obj property
     //selector in the obj (this.state) of this component
@@ -123,8 +135,8 @@ class Navbar extends React.Component {
     return (
       <article
         className="navbar-container"
-        onTouchStart={this.handleTouchEvent}
-        onKeyDown={this.handleKeyDownEvent}
+        // onTouchStart={this.handleTouchEvent}
+        // onKeyDown={this.handleKeyDownEvent}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="18">
           <desc>Insure Company logo</desc>
