@@ -1,4 +1,6 @@
 export function ourSelectors() {
+  //navbar container
+  var navbarContainer = document.querySelector(".navbar-container");
   //open btn
   var openBtn = document.querySelector(".open-btn");
   //close btn
@@ -9,5 +11,6 @@ export function ourSelectors() {
     openBtn,
     closeBtn,
     lastItemOfModal,
+    navbarContainer,
   };
 }

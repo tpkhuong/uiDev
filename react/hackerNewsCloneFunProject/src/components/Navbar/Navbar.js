@@ -6,7 +6,22 @@ import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import HomepageDesktopNav from "../HomepageDesktopNav/HomepageDesktopNav";
 import { ourSelectors } from "../../selectors";
 
-alert("work on focus modal feature");
+console.log("better approach, call our selector func inside componentDidMount");
+console.log(
+  "then assign a property in our this.state the obj that calling ourSelector func returns"
+);
+console.log(
+  "when we need to access an element in the DOM using querySelector, we can access it through our this.state"
+);
+console.log(
+  "instead of calling ourSelector() in each of our event func/method in our component"
+);
+console.log(
+  "in order to use setTimeout() to focus closeBtn or openBtn when either btn is clicked"
+);
+console.log(
+  "we added a touch event listener to the parent container of both btns, we passed in our handleTouchEvent func to the addEventListener func call"
+);
 
 class Navbar extends React.Component {
   /***** ourSelectors() will work in handleClick which will bind to this component using this.handleClick.bind(this) *****/
@@ -24,23 +39,40 @@ class Navbar extends React.Component {
     this.handleKeyDownEvent = this.handleKeyDownEvent.bind(this);
     this.testingStuff = this.testingStuff.bind(this);
     /***** *****/
-    this.state = { selector: ourSelectors };
-    console.log(this.state.selector);
+    this.state = {
+      selectorFunc: ourSelectors,
+      // code will not work. have to call ourSelectors() in componentDidMount
+      // objOfSelectors: ourSelectors(),
+    };
+    console.log(this.state.selectorFunc);
     this.testing = ourSelectors.bind(this);
     console.log("constructor", ourSelectors()); //openBtn and closeBtn are null
   }
 
   handleTouchEvent(event) {
-    const { openBtn, closeBtn, lastItemOfModal } = ourSelectors();
-    console.log("lastItemOfModal", lastItemOfModal);
+    // const { openBtn, closeBtn, lastItemOfModal } = ourSelectors();
+    // console.log("lastItemOfModal", lastItemOfModal);
+    var { openBtn, closeBtn, lastItemOfModal } = this.state.objOfSelectors;
+    console.log("in handleTouchEvent", this.state.objOfSelectors);
+    console.log("openBtn", openBtn);
     if (event.target.parentElement == openBtn) {
       openBtn.setAttribute("aria-pressed", "true");
       closeBtn.setAttribute("aria-pressed", "false");
+      // this.state.focusElement(closeBtn);
+      event.preventDefault();
+      setTimeout(() => {
+        closeBtn.focus();
+      }, 300);
+      // closeBtn.focus();
     }
 
     if (event.target.parentElement == closeBtn) {
       closeBtn.attributes["aria-pressed"].value = "true";
       openBtn.attributes["aria-pressed"].value = "false";
+      event.preventDefault();
+      setTimeout(() => {
+        openBtn.focus();
+      }, 300);
     }
   }
 
@@ -85,15 +117,29 @@ class Navbar extends React.Component {
   }
 
   handleKeyDownEvent(event) {
+    const { openBtn, closeBtn, lastItemOfModal } = ourSelectors();
     console.log("handleKeyDownEvent", event.target);
+    if (event.shiftKey) {
+      event.key == "Tab" && event.target == closeBtn
+        ? (lastItemOfModal.focus(), event.preventDefault())
+        : null;
+    } else {
+      event.key == "Tab" && event.target == lastItemOfModal
+        ? (closeBtn.focus(), event.preventDefault())
+        : null;
+    }
   }
 
   componentDidMount() {
     console.log("componentDidMount", ourSelectors());
-    var { openBtn, closeBtn } = ourSelectors();
+    var { openBtn, closeBtn, navbarContainer } = ourSelectors();
     console.log("openBtn", openBtn);
     console.log("closeBtn", closeBtn);
-    openBtn.addEventListener("click", this.testingStuff); //this work our openBtn will have click event added to it
+    console.log("navbarContainer", navbarContainer);
+    /***** testing idea of adding event listener to navbar container *****/
+    navbarContainer.addEventListener("touchstart", this.handleTouchEvent);
+    //this work our openBtn will have click event added to it
+    // openBtn.addEventListener("click", this.testingStuff);
     /***** we can either declare ourSelectors func in componentDidMount for each component *****/
     /***** or a better approach will be to have a js file in our build-utils or in our src dir *****/
     /***** the function we export from the js file in build-utils will return an obj with our element selectors *****/
@@ -114,6 +160,8 @@ class Navbar extends React.Component {
     //     closeBtn,
     //   };
     // }
+    this.state.objOfSelectors = ourSelectors();
+    console.log("componentDidMount. this.state", this.state);
   }
 
   testingStuff(event) {
@@ -127,16 +175,30 @@ class Navbar extends React.Component {
   }
 
   render() {
-    // we are able to call the func ourSelectors in the render method because we assign the func reference to ourSelector as a value to the obj property
-    //selector in the obj (this.state) of this component
-    console.log("render method", this.state.selector); //this will be our function from selectors.js that we export as ourSelectors
+    // we are not able to call the func ourSelectors in the render method
+    console.log(
+      "render method, this.state.selectorFunc",
+      this.state.selectorFunc
+    ); //this will be our function from selectors.js that we export as ourSelectors
+    var ourObj = this.state.selectorFunc();
+    console.log(ourObj);
     console.log("render method not referencing this.state", ourSelectors()); //openBtn and closeBtn are null
-    console.log(this.testing);
+    // in the constructor we have this code this.testing = ourSelectors.bind(this); assign the func reference of ourSelector to this.testing
+    console.log(this.testing()); //openBtn, closeBtn and etc are null
+    console.log(
+      "render method this.state.selectorFunc()",
+      this.state.selectorFunc()
+    ); //openBtn, closeBtn and etc are null
+    console.log(
+      "render method this.state.objOfSelectors",
+      this.state.objOfSelectors
+    ); //undefined
+
     return (
       <article
         className="navbar-container"
         // onTouchStart={this.handleTouchEvent}
-        // onKeyDown={this.handleKeyDownEvent}
+        onKeyDown={this.handleKeyDownEvent}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="112" height="18">
           <desc>Insure Company logo</desc>
