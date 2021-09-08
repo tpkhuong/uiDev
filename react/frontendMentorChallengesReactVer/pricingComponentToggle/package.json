@@ -1,0 +1,22 @@
+{
+  "name": "pricingcomponenttoggle",
+  "version": "1.0.0",
+  "description": "Pricing Component Toggle Frontend Mentor challenge React version",
+  "main": "index.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve"
+  },
+  "author": "KhuongCorp",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
