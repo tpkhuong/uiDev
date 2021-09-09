@@ -6,6 +6,13 @@ import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import HomepageDesktopNav from "../HomepageDesktopNav/HomepageDesktopNav";
 import { ourSelectors } from "../../selectors";
 
+/***** order of code ran *****/
+//code outside of class component
+//constructor()
+//render(){}
+//componentDidMount
+//our eventFuncs we attached to our element either inline using onTouchStart or using .addEventListener inside componentDidMount
+
 console.log("better approach, call our selector func inside componentDidMount");
 console.log(
   "then assign a property in our this.state the obj that calling ourSelector func returns"
@@ -44,14 +51,25 @@ class Navbar extends React.Component {
       // code will not work. have to call ourSelectors() in componentDidMount
       // objOfSelectors: ourSelectors(),
     };
-    console.log(this.state.selectorFunc);
+    console.log("this.state.selectorFunc", this.state.selectorFunc);
+    console.log(
+      "calling/executing/invoking this.state.selectorFunc",
+      this.state.selectorFunc()
+    ); //all properties in the obj returned from calling this.state.selectorFunc which is a func refer of ourSelectors
     this.testing = ourSelectors.bind(this);
+    console.log("this.testing", this.testing);
+    console.log("calling/executing/invoking this.testing", this.testing()); //all properties in the obj returned from calling this.testing which is func refer of ourSelectors.bind(this);
     console.log("constructor", ourSelectors()); //openBtn and closeBtn are null
   }
 
   handleTouchEvent(event) {
     // const { openBtn, closeBtn, lastItemOfModal } = ourSelectors();
     // console.log("lastItemOfModal", lastItemOfModal);
+    console.log("this.state inside handleTouchEvent", this.state);
+    console.log(
+      "handleTouchEvent. this.state.hasOwnProperty('objOfSelectors')",
+      this.state.hasOwnProperty("objOfSelectors")
+    ); //true
     var { openBtn, closeBtn, lastItemOfModal } = this.state.objOfSelectors;
     console.log("in handleTouchEvent", this.state.objOfSelectors);
     console.log("openBtn", openBtn);
@@ -176,12 +194,20 @@ class Navbar extends React.Component {
 
   render() {
     // we are not able to call the func ourSelectors in the render method
+    console.log("this.state inside render method", this.state);
+    console.log(
+      "this.state.objOfSelectors is not a property on this.state when inside render() method"
+    );
+    console.log(
+      "this is this.state.objOfSelectors this is the obj returned from calling ourSelectors() in componentDidMount",
+      this.state.hasOwnProperty("objOfSelectors")
+    ); //false
     console.log(
       "render method, this.state.selectorFunc",
-      this.state.selectorFunc
+      this.state.selectorFunc()
     ); //this will be our function from selectors.js that we export as ourSelectors
-    var ourObj = this.state.selectorFunc();
-    console.log(ourObj);
+    var ourObj = this.state.selectorFunc(); //all properties are null
+    console.log("ourObj", ourObj);
     console.log("render method not referencing this.state", ourSelectors()); //openBtn and closeBtn are null
     // in the constructor we have this code this.testing = ourSelectors.bind(this); assign the func reference of ourSelector to this.testing
     console.log(this.testing()); //openBtn, closeBtn and etc are null
