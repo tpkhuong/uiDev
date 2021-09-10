@@ -4,16 +4,25 @@ import "../../../public/styles.css";
 import MobileNavBgImg from "../../../public/bg-pattern-mobile-nav.svg";
 import NavBgImg from "../../images/bg-pattern-mobile-nav.svg";
 
+console.log(
+  "outside of NavModal class this component renders after HomepageDesktopNav in our NavBar component"
+);
+
 class NavModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log("constructor NavModal");
   }
 
   componentDidMount() {
     let openBtn = document.querySelector(".open-btn");
-    console.log("this is NavModal", openBtn);
+    console.log(
+      "this is NavModal openBtn using document.querySelector() inside componentDidMount",
+      openBtn
+    );
   }
   render() {
+    console.log("render method in NavModal ");
     return (
       <div
         role="dialog"

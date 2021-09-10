@@ -366,6 +366,26 @@ a:hover {
   }
 }
 
+/* since we want our section element with class pricing-component to have height of 100%.
+html structure is like this:
+html
+    head
+    body
+        div id="app-wrapper"
+            main
+                section
+                section
+            main
+        div id="app-wrapper"
+    body
+html
+which means section parent <main> need to be height 100% main's parent div id app-wrapper needs height 100%
+ir order for us to use min-height on section element.
+*/
+[id="app-wrapper"] {
+  height: 100%;
+}
+
 /* individual sections */
 
 [role="main"] {

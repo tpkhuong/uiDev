@@ -1,9 +1,14 @@
 import React from "react";
 
 // our selectors at top of module
-
-class HomepageDesktopnav extends React.Component {
+console.log("outside of HomepageDesktopNav class");
+class HomepageDesktopNav extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log("constructor HomepageDesktopNav");
+  }
   render() {
+    console.log("render method HomepageDesktopnav");
     return (
       <nav
         role="navigation"
@@ -40,4 +45,4 @@ class HomepageDesktopnav extends React.Component {
   }
 }
 
-export default HomepageDesktopnav;
+export default HomepageDesktopNav;
