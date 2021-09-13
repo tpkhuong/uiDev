@@ -2,7 +2,7 @@ import React from "react";
 import objOfDataForCards from "../../data";
 
 console.log("objOfDataForCards", objOfDataForCards);
-
+alert("enter data next. Let's GOOOOO!!!");
 class PlanCards extends React.Component {
   //pass in prop from
   constructor(props) {
@@ -16,36 +16,50 @@ class PlanCards extends React.Component {
     const { pricePlan } = this.props;
     const planCard = pricePlan == "false" ? "annually" : "monthly";
     return (
-      <article>
-        {objOfDataForCards[planCard].map((obj, index) => {
-          const randomNumber = Math.random();
-          return (
-            <div
-              key={randomNumber}
-              className={`plan-card ${index == 1 ? "hello" : "there"} ${
-                index == 1 ? "word" : "Let's GOOOOO!!!"
-              }`}
-            >
-              {/* name */}
-              <span>{obj.price}</span>
-              {/* price wrapper */}
-              <span>
-                {/* dollar sign */}
-                <span></span>
-                {/* price */}
-                <span></span>
-              </span>
-              {/* storage */}
-              <span></span>
-              {/* users */}
-              <span></span>
-              {/* upload */}
-              <span></span>
-              {/* button */}
-              <a href=""></a>
-            </div>
-          );
-        })}
+      <article className="plan-cards-container">
+        {objOfDataForCards[planCard].map(
+          (
+            { plan, price, capacity, usersAllowed, uploadSize, link },
+            index
+          ) => {
+            const randomNumber = Math.random();
+            return (
+              <div
+                key={randomNumber}
+                className={`plan-card bg-${index == 1 ? "dark" : "light"}${
+                  index == 1 ? " middle-element-margin-padding-block" : ""
+                }`}
+              >
+                {/* name */}
+                <span className="plan-card__plan-name"></span>
+                {/* price wrapper */}
+                <span
+                  classname={`plan-card__price-wrapper${
+                    index !== 1 ? " dark-shade" : ""
+                  }`}
+                >
+                  {/* dollar sign */}
+                  <span className="plan-card__price-wrapper__price-sign medium-font"></span>
+                  {/* price */}
+                  <span className="plan-card__price-wrapper__price large-font"></span>
+                </span>
+                {/* storage */}
+                <span className="plan-card__storage"></span>
+                {/* users */}
+                <span className="plan-card__users"></span>
+                {/* upload */}
+                <span className="plan-card__upload"></span>
+                {/* button */}
+                <a
+                  className={`plan-card__btn btn-${
+                    index == 1 ? "light" : "dark"
+                  }`}
+                  href=""
+                ></a>
+              </div>
+            );
+          }
+        )}
       </article>
     );
   }
