@@ -5,6 +5,8 @@ import { HeaderSection } from "./components/HeaderSection/HeaderSection";
 import MainSection from "./components/MainSection/MainSection";
 import FooterSection from "./components/FooterSection/FooterSection";
 
+import { NavBar } from "./components/NavBar/NavBar.jsx";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,8 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <HeaderSection>
-          <nav>
+          <NavBar />
+          {/* <nav>
             <ul>
               <li>
                 <a href="">Hello</a>
@@ -25,7 +28,7 @@ class App extends React.Component {
                 <a href="">This is the navbar in header</a>
               </li>
             </ul>
-          </nav>
+          </nav> */}
         </HeaderSection>
         <MainSection aria-pressed="true">
           <h1>Crowd Funding Product Page</h1>
