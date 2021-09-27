@@ -286,7 +286,7 @@ class Results extends React.Component {
           </h3>
         </div> */}
         </div>
-        {/* button is converted to a Link */}
+        {/* button is converted to a Link, makes more sense since when user click on this "button" it will take them to a different page/link */}
         <Link className="btn dark-btn btn-space" to="/battle">
           Reset
         </Link>
