@@ -3,6 +3,7 @@ import HomepageMobileNav from "../HomepageMobileNav/HomepageMobileNav";
 import "../../../public/styles.css";
 import MobileNavBgImg from "../../../public/bg-pattern-mobile-nav.svg";
 import NavBgImg from "../../images/bg-pattern-mobile-nav.svg";
+import { dataObj } from "../../ourData";
 
 console.log(
   "outside of NavModal class this component renders after HomepageDesktopNav in our NavBar component"
@@ -12,6 +13,9 @@ class NavModal extends React.Component {
   constructor(props) {
     super(props);
     console.log("constructor NavModal");
+    this.state = {
+      arrOfText: dataObj.arrayOfLinkText,
+    };
   }
 
   componentDidMount() {
@@ -20,9 +24,15 @@ class NavModal extends React.Component {
       "this is NavModal openBtn using document.querySelector() inside componentDidMount",
       openBtn
     );
+
+    this.state.element = document.querySelector("#homepage-desktop-navbar");
   }
   render() {
     console.log("render method in NavModal ");
+    console.log(
+      "mavModal render where homepagemobilenav",
+      document.querySelector("#homepage-desktop-navbar")
+    );
     return (
       <div
         role="dialog"
@@ -37,7 +47,12 @@ class NavModal extends React.Component {
           <h2 className="visually-hidden" id="dialog1">
             Mobile Navigation
           </h2>
-          <HomepageMobileNav></HomepageMobileNav>
+          {/* props.ourArray will be an Object without the property element. looks like below
+          Object {  }
+          element: <nav id="homepage-desktop-navbar" role="navigation" aria-labelledby="homepage-desktop-navigation">​
+          <prototype>: Object { … }
+          */}
+          <HomepageMobileNav ourArray={this.state}></HomepageMobileNav>
           {/* {this.props.children} */}
           {/* make ul dynamic */}
           {/* <ul role="menu" className="navlist">

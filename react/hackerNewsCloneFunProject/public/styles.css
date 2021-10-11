@@ -245,6 +245,11 @@ a:hover {
   cursor: pointer;
 }
 
+button:focus {
+  outline: 2px;
+  outline: 1px solid blue;
+}
+
 /* test out [class*=btn-]{} 
 .btn-light{
     --bg

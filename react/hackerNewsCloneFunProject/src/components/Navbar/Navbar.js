@@ -12,7 +12,7 @@ import { ourSelectors } from "../../selectors";
 //render(){}
 //componentDidMount
 //our eventFuncs we attached to our element either inline using onTouchStart or using .addEventListener inside componentDidMount
-
+console.log(ourSelectors);
 console.log("better approach, call our selector func inside componentDidMount");
 console.log(
   "then assign a property in our this.state the obj that calling ourSelector func returns"
