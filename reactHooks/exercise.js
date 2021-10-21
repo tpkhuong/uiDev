@@ -167,9 +167,9 @@ function Todo() {
   React.useEffect(() => {
     const inputField = document.querySelector("#item");
     const submitBtn = document.querySelector("button[type='submit']");
-    const deleteBtn = document.querySelector("#delete-btn");
+    // const deleteBtn = document.querySelector("#delete-btn");
     // add todo
-    item["inputField"] = inputField;
+    // item["inputField"] = inputField;
   });
 
   const addItem = arrState((arrInput) => {
@@ -195,22 +195,22 @@ function Todo() {
         </button>
       </form>
       <ul role="menu" className="navlist">
-        {arrInput.map((todoItem, index, list) => {
+        {arrOfItems.map((todoItem, index, list) => {
           <li key={`${Math.random * index}`} role="none" className="navitem">
             {todoItem}
           </li>;
-          {
-            arrOfItems.length > 0 ? (
-              <button
-                onClick={deleteItem}
-                role="button"
-                className="delete-btn"
-                id="delete-button"
-              >
-                Delete
-              </button>
-            ) : null;
-          }
+          //   {
+          //     arrOfItems.length > 0 ? (
+          //       <button
+          //         onClick={deleteItem}
+          //         role="button"
+          //         className="delete-btn"
+          //         id="delete-button"
+          //       >
+          //         Delete
+          //       </button>
+          //     ) : null;
+          //   }
         })}
       </ul>
     </div>
@@ -221,40 +221,41 @@ class Todo extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleAddingTodos = this.handleAddingTodos.bind(this);
-
     this.state = {
       item: "",
       arrOfItems: [],
     };
+    this.handleAddingTodos = this.handleAddingTodos.bind(this);
   }
 
   componentDidMount() {
     const inputElement = document.querySelector(".input-field");
     const submitBtn = document.querySelector(".submit-btn");
-    const closeBtn = document.querySelector(".delete-btn");
-    this.state.closeBtn = closeBtn;
+
     this.state.inputElement = inputElement;
     submitBtn.addEventListener("click", this.handleAddingTodos);
 
-    if (this.state.closeBtn) {
-      this.handleDeletingTodos = this.handleDeletingTodos.bind(this);
-    }
+    // if (this.state.closeBtn) {
+    //   this.handleDeletingTodos = this.handleDeletingTodos.bind(this);
+    // }
   }
 
   handleAddingTodos(event) {
     // const inputElement = document.querySelector(".input-field");
-
-    if (this.state.arrOfItems.length > 0) {
-      this.state.closeBtn.addEventListener("click", this.handleDeleteingTodos);
-    }
-    // add click event to delete btn when we add an item
-    console.log(this.state.arrOfItems);
-
+    // const closeBtn = document.querySelector(".delete-btn");
     const currItem = this.state.inputElement.value;
-    this.setState(() => {
-      this.state.arrOfItems.push(currItem);
-    });
+    this.state.arrOfItems.push(currItem);
+    console.log("handleAddingTodos", this.state.arrOfItems);
+
+    // if (this.state.arrOfItems.length > 0) {
+    //   this.state.closeBtn = closeBtn;
+    //   this.state.closeBtn.addEventListener("click", this.handleDeleteingTodos);
+    // }
+    // add click event to delete btn when we add an item
+
+    // this.setState(() => {
+    //   this.state.arrOfItems.push(currItem);
+    // });
     console.log(this.state.arrOfItems);
   }
 
@@ -262,6 +263,7 @@ class Todo extends React.Component {
 
   render() {
     const { arrOfItems } = this.state;
+    console.log("render", arrOfItems);
     return (
       <React.Fragment>
         <form action="#">
@@ -280,27 +282,21 @@ class Todo extends React.Component {
           </button>
         </form>
         <ul role="menu" className="navlist">
-          {arrOfItems.length > 0
-            ? arrOfItems.map((item, index, list) => {
-                return (
-                  <React.Fragment>
-                    <li
-                      key={`${Math.random * index}`}
-                      role="none"
-                      className="navitem"
-                    >
-                      {item}
-                    </li>
-                    <button
-                      className="delete-btn"
-                      aria-label={`delete ${item}`}
-                    >
-                      Delete
-                    </button>
-                  </React.Fragment>
-                );
-              })
-            : null}
+          {arrOfItems.length === 0 ? (
+            <span>Add a todo item</span>
+          ) : (
+            arrOfItems.map((item, index, list) => {
+              return (
+                <li
+                  key={`${Math.random * index}`}
+                  role="none"
+                  className="navitem"
+                >
+                  {item}
+                </li>
+              );
+            })
+          )}
         </ul>
       </React.Fragment>
     );
