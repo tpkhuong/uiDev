@@ -160,20 +160,25 @@ function Todo() {
     </div>
   );
 }
+
 function Todo() {
   //   useState goes here
   const [item, itemState] = React.useState("");
   const [arrOfItems, arrState] = React.useState([]);
+
   React.useEffect(() => {
-    const inputField = document.querySelector("#item");
     const submitBtn = document.querySelector("button[type='submit']");
+    const inputField = document.querySelector("#item");
+    console.log("inputField", inputField);
     // const deleteBtn = document.querySelector("#delete-btn");
     // add todo
     // item["inputField"] = inputField;
   });
 
   const addItem = arrState((arrInput) => {
-    arrInput.push(inputField.value);
+    if (inputField) {
+      arrInput.push(inputField.value);
+    }
   });
   const deleteItem = arrState(() => {
     arrOfItems.pop();
@@ -188,7 +193,7 @@ function Todo() {
         <button
           onClick={addItem}
           type="submit"
-          aria-label="add item button"
+          aria-label="add item"
           role="button"
         >
           Submit
