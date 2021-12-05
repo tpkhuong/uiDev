@@ -1,6 +1,13 @@
 import React from "react";
 import { ourSelectors } from "../../selectors";
-
+import { dataObj } from "../../ourData";
+/**
+ * passing dataObj selector from NavModal the component that renders this component
+ * **/
+// const dataobj = document.querySelector("#data-obj");
+// dataobj.dataElement = {
+//   name: "Hello",
+// };
 class HomepageMobileNav extends React.Component {
   constructor(props) {
     super(props);
@@ -8,8 +15,16 @@ class HomepageMobileNav extends React.Component {
       "homepagemobilenav constructor",
       document.querySelector("#homepage-desktop-navbar")
     );
-
+    const ourData = props.ourObj;
+    ourData.dataElement["lastName"] = "Deadpool";
+    console.log(
+      "props.ourObj assigned to ourData identifier",
+      ourData.dataElement
+    );
+    // console.log("homepageMobileNav", dataobj);
+    console.log(dataObj, "dataobj");
     console.log(ourSelectors()); //all properties are null
+    console.log("props", props.selectorObj()); //passing ourSelector func as props to this component all properties still null
     // var arrOfListName = props.
     console.log("props", props.ourArray.arrOfText);
   }

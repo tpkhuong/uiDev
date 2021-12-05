@@ -4,7 +4,11 @@ import "../../../public/styles.css";
 import MobileNavBgImg from "../../../public/bg-pattern-mobile-nav.svg";
 import NavBgImg from "../../images/bg-pattern-mobile-nav.svg";
 import { dataObj } from "../../ourData";
-
+import { ourSelectors } from "../../selectors";
+const dataobj = document.querySelector("#data-obj");
+dataobj.dataElement = {
+  name: "Hello",
+};
 console.log(
   "outside of NavModal class this component renders after HomepageDesktopNav in our NavBar component"
 );
@@ -52,7 +56,11 @@ class NavModal extends React.Component {
           element: <nav id="homepage-desktop-navbar" role="navigation" aria-labelledby="homepage-desktop-navigation">​
           <prototype>: Object { … }
           */}
-          <HomepageMobileNav ourArray={this.state}></HomepageMobileNav>
+          <HomepageMobileNav
+            ourObj={dataobj}
+            selectorObj={ourSelectors}
+            ourArray={this.state}
+          ></HomepageMobileNav>
           {/* {this.props.children} */}
           {/* make ul dynamic */}
           {/* <ul role="menu" className="navlist">

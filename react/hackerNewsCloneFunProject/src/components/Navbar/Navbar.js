@@ -149,6 +149,7 @@ class Navbar extends React.Component {
   }
 
   componentDidMount() {
+    console.log(document.querySelector("#data-element"));
     console.log("inside componentDidMount NavBar");
     console.log("componentDidMount", ourSelectors());
     var { openBtn, closeBtn, navbarContainer } = ourSelectors();

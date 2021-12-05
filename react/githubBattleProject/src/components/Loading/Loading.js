@@ -65,12 +65,13 @@ Loading.defaultProps = {
 
 export default Loading;
 
-function testingIdea({ name }) {
-  console.log(`Hello ${name}`);
+function testingIdea({ name, profession }) {
+  console.log(`Hello ${name}. I am a ${profession}`);
 }
 
 var objOfStuff = {
   name: "Deadpool",
+  profession: "Cooldude",
 };
 
 testingIdea(objOfStuff);

@@ -226,6 +226,7 @@ class Todo extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log("constructor");
     this.state = {
       item: "",
       arrOfItems: [],
@@ -249,7 +250,10 @@ class Todo extends React.Component {
     // const inputElement = document.querySelector(".input-field");
     // const closeBtn = document.querySelector(".delete-btn");
     const currItem = this.state.inputElement.value;
-    this.state.arrOfItems.push(currItem);
+    this.setState((item) => {
+      // item will be the object assign to this.state
+      return (this.state.arrOfItems = this.state.arrOfItems.concat([currItem]));
+    });
     console.log("handleAddingTodos", this.state.arrOfItems);
 
     // if (this.state.arrOfItems.length > 0) {
@@ -268,7 +272,13 @@ class Todo extends React.Component {
 
   render() {
     const { arrOfItems } = this.state;
-    console.log("render", arrOfItems);
+    /*
+    reason our render() runs twice. render method should be a pure function no side effect like console.log()
+    The render function can be called almost any number of times before the commit phase occurs and updates are flushed to the DOM. 
+    The render function should also be a pure function, meaning there are no side-effects, like console logging.
+    Instead use the componentDidUpdate lifecycle function to log when state or props update. Perhaps this diagram would help.
+    */
+    // console.log("render", arrOfItems);
     return (
       <React.Fragment>
         <form action="#">
@@ -287,7 +297,17 @@ class Todo extends React.Component {
           </button>
         </form>
         <ul role="menu" className="navlist">
-          {arrOfItems.length === 0 ? (
+          {arrOfItems.map((eachItem, index) => {
+            return (
+              <li key={Math.random() * index} role="none">
+                <span>{eachItem}</span>
+                <button className="delete-item" aria-label="delete todo">
+                  Delete Item
+                </button>
+              </li>
+            );
+          })}
+          {/* {arrOfItems.length === 0 ? (
             <span>Add a todo item</span>
           ) : (
             arrOfItems.map((item, index, list) => {
@@ -301,7 +321,7 @@ class Todo extends React.Component {
                 </li>
               );
             })
-          )}
+          )} */}
         </ul>
       </React.Fragment>
     );
