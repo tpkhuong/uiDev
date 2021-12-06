@@ -7,6 +7,7 @@ const dataobj = document.querySelector("#data-obj");
 dataobj.dataElement = {
   name: "Hello",
 };
+
 // Component
 // State
 // lifecycle
@@ -15,12 +16,15 @@ dataobj.dataElement = {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: "Deadpool",
+    };
     console.log("App constructor", dataobj.dataElement);
   }
   render() {
     return (
       <React.Fragment>
-        {/* <DataElement /> */}
+        <DataElement />
         <Navbar></Navbar>
       </React.Fragment>
     );
